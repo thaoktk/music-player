@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thaoktk - Music Player</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div class="player">
+        <!-- dashboard -->
+        <div class="dashboard">
+            <header class="header">
+                <i class='header-icon bx bx-arrow-back' ></i>
+                <h4>PLAYING NOW</h4>
+                <i class='header-icon-menu bx bx-list-ul'></i>
+            </header>
+            <div class="body">
+                <div class="cd">
+                    <img class="cd-thumb" src="./assets/img/sayso.png"></img>
+                </div>
+                <div class="body-info">
+                    <div class="info">
+                        <h3>hello</h3>
+                        <p>teayeon</p>
+                    </div>
+                    <div class="control">
+                        <div class="button">
+                            <div class="btn btn-repeat">
+                                <i class='bx bx-repeat'></i>
+                            </div>
+                            <div class="btn btn-like">
+                                <i class='bx bx-heart not-like'></i>
+                                <i class='bx bxs-heart fill-like' ></i>
+                            </div>
+                        </div>
+                        <div class="progress-container">
+                            <div class="progress"></div>
+                        </div>
+                        <audio id="audio" src=""></audio>
+                        <div class="button-control">
+                            <div class="btn btn-prev">
+                                <i class='bx bx-skip-previous' ></i>
+                            </div>
+                            <div class="btn btn-toggle-play">
+                                <i class='icon-pause bx bx-pause' ></i>
+                                <i class='icon-play bx bx-play' ></i>
+                            </div>
+                            <div class="btn btn-next">
+                                <i class='bx bx-skip-next' ></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- playlist -->
+        <div class="playlist">
+            <div class="header">
+                <i class='header-icon-back-playlist bx bx-arrow-back' ></i>
+                <h4>PLAYLIST</h4>
+                <i class='header-icon-menu bx bx-list-ul'></i>
+            </div>
+            <div class="list">
+            </div>
+        </div>
+    </div>
+    <script src="./main.js"></script>
+</body>
+</html>

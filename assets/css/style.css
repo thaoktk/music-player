@@ -1,0 +1,376 @@
+:root {
+    --primary-color: #efa1b4;
+    --text-color: #d24e6e;
+    --text-second-color: #d35473;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+body {
+    background-color: rgb(214, 213, 213);
+}
+
+html {
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+.player {
+    margin: auto;
+    position: relative;
+}
+
+.dashboard {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ffeff3;
+    overflow: hidden;
+    height: 100vh;
+    position: relative;
+}
+
+/* header */
+.header {
+    padding: 30px 20px 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header h4 {
+    font-size: 14px;
+    font-weight: 500;
+    flex: 1;
+    text-align: center;
+    color: var(--text-second-color);
+}
+
+.header-icon-menu, .header-icon, .header-icon-back-playlist {
+    font-size: 24px;
+    padding: 10px;
+    color: var(--text-second-color)
+}
+
+/* body */
+
+.body {
+    padding: 0 30px 30px 30px;
+    background-color: #fff;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: auto;
+    min-height: 400px;
+}
+
+.cd {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    margin: auto;
+    position: absolute;
+    z-index: 1;
+    top: -20%; 
+    left: 50%;
+    transform: translateX(-50%);
+    -moz-box-shadow:    0px 0px 5px 2px #f3bdc9;
+    -webkit-box-shadow: 0px 0px 5px 2px #f3bdc9;
+}
+
+.cd-thumb {
+    display: block;
+    object-fit: cover;
+    width: 100%;
+    border-radius: 50%;
+    box-shadow: 0 5px 15px #f3bdc9;
+}
+
+.body-info {
+    position: relative;
+    padding-top: 25vh;
+    padding-bottom: 30px;
+}
+
+.info {
+    text-align: center;
+}
+
+.info h3 {
+    font-size: 20px;
+    font-weight: 500;
+    color: #dd8097;
+}
+
+.info p {
+    font-size: 12px;
+    color: #f3bdc9;
+}
+
+.control {
+    margin-top: 4px;
+}
+
+/* like & repeat */
+.button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn.btn-repeat.active {
+    color: var(--text-color);
+}
+
+.button .btn {
+    padding: 10px;
+    font-size: 18px;
+    color: #f2b1c0;
+}
+
+.btn.btn-like .fill-like {
+    display: none;
+}
+
+.btn.liked .fill-like {
+    display: inline-block;
+}
+
+.btn.liked .not-like {
+    display: none;
+}
+
+/* progress */
+
+.progress-container {
+    margin: 10px 0 0 0;
+    width: 100%;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #fdf5f7;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.progress {
+    width: 0;
+    appearance: none;
+    background-color: #f2b1c0;
+    height: 100%;
+    opacity: 0.7;
+    border-radius: 5px;
+    -webkit-transition: width 0.1s lỉnear;
+    transition: width 0.1s lỉnear;
+}
+
+.progress:hover {
+    opacity: 1;
+}
+
+
+/* control */
+.button-control {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.button-control .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    background-color: #fdf5f7;
+    border-radius: 50%;
+    font-size: 30px;
+    color: #f2b1c0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+.btn.btn-toggle-play {
+    padding: 15px;
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.button-control .btn .icon-pause {
+    display: none;
+}
+
+.player.playing .icon-pause {
+    display: inline-block;
+}
+
+.player.playing .icon-play {
+    display: none;
+}
+
+/* playlist */
+
+.playlist {
+    background: linear-gradient(to left top, #ffeff3, #fcdde4);
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform: translateX(100%);
+    transition: all 0.9s ease;
+    overflow-y: auto;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.playlist.active {
+    transform: translateX(0);
+}
+
+.list {
+    margin-top: 20px;
+    padding: 0 50px;
+}
+
+.song {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 50px;
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+.song.active {
+    padding: 10px 20px;
+    background: linear-gradient(to left top, #ff9ba0,#fecdec);
+}
+
+.song:active {
+    opacity: 0.8;
+}
+
+.song.active .song-name h3, .song.active .song-name p, .song.active .time {
+    color: rgb(173, 59, 59);
+}
+
+.song-name h3 {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.song-name p {
+    color: var(--text-second-color);
+}
+
+.time {
+    color: #f2b1c0;
+}
+
+.song-play {
+    display: flex;
+}
+
+.player.playing .song.active .time {
+    display: none;
+}
+
+.button-on-play {
+    display: none;
+}
+
+.button-on-play .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 50%;
+    font-size: 30px;
+    color: #efa2ac;
+    transition: all 0.2s;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.player.playing .song.active .button-on-play {
+    display: block;
+}
+
+@media (max-width: 739px) and (min-width: 350px) {
+    .list {
+        padding: 0 30px;
+    }
+
+    .header {
+        padding: 40px 20px 0 20px;
+    }
+
+    .body {
+        top: 30%;
+    }
+
+    .info h3 {
+        font-size: 28px;
+    }
+
+    .info p {
+        font-size: 18px;
+    }
+
+    .button {
+        margin-top: 20px;
+    }
+
+    .progress {
+        margin-top: 20px;
+    }
+
+    .control {
+        margin-top: 20px;
+    }
+
+    .button .btn {
+        font-size: 22px;
+    }
+
+    
+}
+@media (max-width: 1024px) and (min-width: 740px) {
+    .info h3 {
+        font-size: 28px;
+    }
+
+    .info p {
+        font-size: 18px;
+    }
+
+    .header h4, .header-icon-menu, .header-icon, .header-icon-back-playlist {
+        font-size: 28px;
+    }
+
+    .body-info {
+        padding-top: 20vh;
+    }
+
+    .body {
+        top: 30%;
+    }
+
+    .button-control {
+        margin-top: 60px;
+    }
+
+}

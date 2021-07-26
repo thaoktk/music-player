@@ -98,7 +98,7 @@ html {
 
 .body-info {
     position: relative;
-    padding-top: 25vh;
+    padding-top: 23vh;
     padding-bottom: 30px;
 }
 
@@ -136,6 +136,10 @@ html {
     padding: 10px;
     font-size: 18px;
     color: #f2b1c0;
+}
+
+.btn.btn-random.active {
+    color: var(--text-color);
 }
 
 .btn.btn-like .fill-like {
@@ -356,6 +360,10 @@ html {
 
     .info p {
         font-size: 18px;
+    }
+
+    .cd {
+        top: -20%;
     }
 
     .header h4, .header-icon-menu, .header-icon, .header-icon-back-playlist {

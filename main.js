@@ -13,6 +13,8 @@
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
+const PLAYER_STORAGE_KEY = 'THAO_PLAYER'
+
 const listMusic = $('.list')
 const playlist = $('.playlist')
 const player = $('.player')
@@ -24,6 +26,7 @@ const playBtn = $('.btn-toggle-play')
 const nextBtn = $('.btn-next')
 const prevBtn = $('.btn-prev')
 const repeatBtn = $('.btn-repeat')
+const randomBtn = $('.btn-random')
 const likeBtn = $('.btn-like')
 const progress = $('.progress')
 const progressContainer = $('.progress-container')
@@ -37,7 +40,13 @@ const app = {
     currentIndex: 0,
     isLiked: false,
     isPlaying: false,
+    isRandom: false,
     isRepeat: false,
+    config: JSON.stringify(localStorage.getItem(PLAYER_STORAGE_KEY)) || {},
+    setConfig: function(key, value) {
+        this.config[key] = value
+        localStorage.setItem(PLAYER_STORAGE_KEY, JSON.stringify(this.config))
+    },
     songs: [
         {
             name: 'Say so',
@@ -181,14 +190,22 @@ const app = {
 
         // xử lý khi next bài
         nextBtn.onclick = function() {
-            _this.nextSong();
+            if (_this.isRandom) {
+                _this.playRandomSong();
+            } else {
+                _this.nextSong();
+            }
             audio.play();
             _this.render();
         }
 
         // xử lý khi prev bài
         prevBtn.onclick = function() {
-            _this.prevSong();
+            if (_this.isRandom) {
+                _this.playRandomSong();
+            } else {
+                _this.prevSong();
+            }
             audio.play();
             _this.render();
         }
@@ -196,7 +213,15 @@ const app = {
         // xử lý khi hết bài khi bấm repeat 
         repeatBtn.onclick = function() {
             _this.isRepeat = !_this.isRepeat;
+            _this.setConfig('isRepeat', _this.isRepeat);
             repeatBtn.classList.toggle('active', _this.isRepeat);
+        }
+
+        // random song
+        randomBtn.onclick = function() {
+            _this.isRandom = !_this.isRandom;
+            _this.setConfig('isRandom', _this.isRandom);
+            randomBtn.classList.toggle('active', _this.isRandom);
         }
 
         // xử lý khi like 
@@ -244,6 +269,15 @@ const app = {
             alert('Nothing to show!');
         }
     },
+    playRandomSong: function() {
+        let newIndex
+        do {
+            newIndex = Math.floor(Math.random() * this.songs.length);
+        } while (newIndex === this.currentIndex);
+
+        this.currentIndex = newIndex
+        this.loadCurrentSong();
+    },
     nextSong: function() {
         this.currentIndex++;
         if (this.currentIndex >= this.songs.length) {
@@ -260,11 +294,19 @@ const app = {
 
         this.loadCurrentSong();
     },
+    loadConfig: function() {
+        this.isRepeat = this.config.isRepeat;
+        this.isRandom = this.config.isRandom;
+    },
     start: function() {
+        this.loadConfig();
         this.handleEvents();
         this.defineProperties();
         this.loadCurrentSong();
         this.render();
+
+        randomBtn.classList.toggle('active', this.isRandom);
+        repeatBtn.classList.toggle('active', this.isRepeat);
     }
 }
 

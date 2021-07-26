@@ -13,7 +13,7 @@
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
-const PLAYER_STORAGE_KEY = 'THAO_PLAYER'
+const PLAYER_STORAGE_KEY = 'THAOKTK_PLAYER'
 
 const listMusic = $('.list')
 const playlist = $('.playlist')
@@ -35,28 +35,23 @@ const backMainBtn = $('.header-icon-back-playlist')
 const backInMainBtn = $('.header-icon')
 const playlistOnSecond = $('.playlist .header-icon-menu')
 
-
 const app = {
     currentIndex: 0,
     isLiked: false,
     isPlaying: false,
     isRandom: false,
     isRepeat: false,
-    config: JSON.stringify(localStorage.getItem(PLAYER_STORAGE_KEY)) || {},
-    setConfig: function(key, value) {
-        this.config[key] = value
-        localStorage.setItem(PLAYER_STORAGE_KEY, JSON.stringify(this.config))
-    },
+    config: JSON.parse(localStorage.getItem(PLAYER_STORAGE_KEY)) || {}, // chỗ này là get, lấy ra nên phải parse
     songs: [
         {
-            name: 'Say so',
+            name: 'Say So',
             singer: 'Doja Cat',
             path: './assets/songs/SaySo-DojaCat-6159032.mp3',
             image: './assets/img/sayso.png',
             time: '3:57'
         },
         {
-            name: 'Lemon tree',
+            name: 'Lemon Tree',
             singer: 'Gustixa',
             path: './assets/songs/LemonTree-Gustixa-6737476.mp3',
             image: './assets/img/lemontree.jpg',
@@ -70,14 +65,14 @@ const app = {
             time: '3:46'
         },
         {
-            name: 'Save your tears',
+            name: 'Save Your Tears',
             singer: 'The Weeknd',
             path: './assets/songs/SaveYourTears-TheWeeknd-6341494.mp3',
             image: './assets/img/save your tears.jpg',
             time: '3:35'
         },
         {
-            name: 'Play date',
+            name: 'Play Date',
             singer: ' Melanie Martinez',
             path: './assets/songs/Play Date - Melanie Martinez.mp3',
             image: './assets/img/playdate.jpg',
@@ -89,6 +84,41 @@ const app = {
             path: './assets/songs/L_O_V_E - Nat King Cole.mp3',
             image: './assets/img/l.o.v.e.2.jpeg',
             time: '2:34'
+        },
+        {
+            name: 'Rockabye',
+            singer: 'Clean Bandit',
+            path: './assets/songs/Rockabye - Clean Bandit_ Sean Paul_ Anne.mp3',
+            image: './assets/img/rockabye.jpg',
+            time: '4:09'
+        },
+        {
+            name: 'Love Story',
+            singer: 'Taylor Swift',
+            path: './assets/songs/LoveStory-TaylorSwift-5046622.mp3',
+            image: './assets/img/lovestory.png',
+            time: '3:54'
+        },
+        {
+            name: 'You Belong With Me',
+            singer: 'Taylor Swift',
+            path: './assets/songs/You Belong With Me - Taylor Swift.mp3',
+            image: './assets/img/youbelongwithme.jpg',
+            time: '3:52'
+        },
+        {
+            name: 'Symphony',
+            singer: 'Clean Bandit',
+            path: './assets/songs/Symphony-CleanBanditZaraLarsson-4822950.mp3',
+            image: './assets/img/symphony.jpg',
+            time: '3:32'
+        },
+        {
+            name: 'Rather Be',
+            singer: 'Clean Bandit',
+            path: './assets/songs/Rather Be - Clean Bandit_ Jess Glynne.mp3',
+            image: './assets/img/rather-be.jpg',
+            time: '3:48'
         }
     ],
     render: function() {
@@ -114,6 +144,10 @@ const app = {
 
         listMusic.innerHTML = htmls;
     },
+    setConfig: function(key, value) {
+        this.config[key] = value;
+        localStorage.setItem(PLAYER_STORAGE_KEY, JSON.stringify(this.config)) // set thì cho nó về chuỗi json, get ở trên thì cho nó về obj
+    },
     defineProperties: function() { 
         Object.defineProperty(this, 'currentSong', {
             get: function() {
@@ -125,7 +159,7 @@ const app = {
         heading.textContent = this.currentSong.name;
         author.textContent = this.currentSong.singer;
         cdThumb.src = this.currentSong.image;
-        audio.src = this.currentSong.path
+        audio.src = this.currentSong.path;
     },
     handleEvents: function() {
         const _this = this;
@@ -144,6 +178,7 @@ const app = {
             
         }
 
+        // cho vao set time de no render bai hat ra moi chay dong nay dc
         setInterval(function() {
             // xử lý play khi đang ở trên playlist 
                 if ($('.song.active')) {
@@ -154,8 +189,7 @@ const app = {
                         }
                     }
                 }
-    
-            }, 100)
+        }, 100)
 
         // khi audio dc phát
         audio.onplay = function() {
@@ -197,6 +231,7 @@ const app = {
             }
             audio.play();
             _this.render();
+            _this.scrollToActiveSong();
         }
 
         // xử lý khi prev bài
@@ -208,6 +243,7 @@ const app = {
             }
             audio.play();
             _this.render();
+            _this.scrollToActiveSong();
         }
 
         // xử lý khi hết bài khi bấm repeat 
@@ -245,7 +281,7 @@ const app = {
             if (songNode) {
                 _this.currentIndex = Number(songNode.getAttribute('data-index'));
                 _this.loadCurrentSong(); //load lại thông tin
-                _this.render(); // phỉa load lại bài hát hiện tại chứ
+                _this.render(); // phía load lại bài hát hiện tại chứ
                 audio.play();
             }
         }
@@ -294,9 +330,25 @@ const app = {
 
         this.loadCurrentSong();
     },
+    scrollToActiveSong: function() {
+        const songActive = $('.song.active')
+        setTimeout(() => {
+            if (this.currentIndex <= 3) {
+                songActive.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                })
+            } else {
+                songActive.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'nearest'
+                })
+            }
+        }, 100)
+    },
     loadConfig: function() {
-        this.isRepeat = this.config.isRepeat;
         this.isRandom = this.config.isRandom;
+        this.isRepeat = this.config.isRepeat;
     },
     start: function() {
         this.loadConfig();

@@ -274,6 +274,9 @@ html {
     font-size: 20px;
     font-weight: 500;
     color: var(--text-color);
+    text-overflow: ellipsis;
+    overflow: hidden; 
+    white-space: nowrap;
 }
 
 .song-name p {
@@ -312,6 +315,12 @@ html {
 
 .player.playing .song.active .button-on-play {
     display: block;
+}
+
+@media (max-width: 349px) {
+    .song-name h3 {
+        width: 140px;
+    }
 }
 
 @media (max-width: 739px) and (min-width: 350px) {

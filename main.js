@@ -34,6 +34,7 @@ const menu = $('.header-icon-menu')
 const backMainBtn = $('.header-icon-back-playlist')
 const backInMainBtn = $('.header-icon')
 const playlistOnSecond = $('.playlist .header-icon-menu')
+const volumeSlider = $('.volume-slider')
 
 const app = {
     currentIndex: 0,
@@ -304,6 +305,10 @@ const app = {
         playlistOnSecond.onclick = function() {
             alert('Nothing to show!');
         }
+
+        volumeSlider.oninput = function() {
+            _this.setVolume();
+        }
     },
     playRandomSong: function() {
         let newIndex
@@ -329,6 +334,9 @@ const app = {
         }
 
         this.loadCurrentSong();
+    },
+    setVolume: function() {
+        audio.volume = volumeSlider.value / 100;
     },
     scrollToActiveSong: function() {
         const songActive = $('.song.active')

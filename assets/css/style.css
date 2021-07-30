@@ -55,7 +55,8 @@ html {
 .header-icon-menu, .header-icon, .header-icon-back-playlist {
     font-size: 24px;
     padding: 10px;
-    color: var(--text-second-color)
+    color: var(--text-second-color);
+    cursor: pointer;
 }
 
 /* body */
@@ -154,10 +155,42 @@ html {
     display: none;
 }
 
+/* volume */
+.volume {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.volume-icon {
+    color: #f2b1c0;
+    font-size: 20px;
+    margin: 0 15px;
+}
+
+.volume-slider {
+    width: 50%;
+    height: 10px;
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: #fdf5f7;
+    border-radius: 3px;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #f2b1c0;
+}
+
 /* progress */
 
 .progress-container {
-    margin: 10px 0 0 0;
     width: 100%;
     height: 10px;
     border-radius: 5px;
@@ -184,7 +217,7 @@ html {
 
 /* control */
 .button-control {
-    margin-top: 40px;
+    margin-top: 30px;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -231,6 +264,7 @@ html {
     left: 0;
     right: 0;
     bottom: 0;
+    opacity: 0;
     transform: translateX(100%);
     transition: all 0.9s ease;
     overflow-y: auto;
@@ -238,6 +272,7 @@ html {
 }
 
 .playlist.active {
+    opacity: 1;
     transform: translateX(0);
 }
 
@@ -254,6 +289,7 @@ html {
     margin-bottom: 10px;
     border-radius: 50px;
     -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
 }
 
 
@@ -321,6 +357,14 @@ html {
     .song-name h3 {
         width: 140px;
     }
+
+    .header {
+        padding: 20px 20px 0 20px;
+    }
+
+    .body-info {
+        padding-bottom: 10px;
+    }
 }
 
 @media (max-width: 739px) and (min-width: 350px) {
@@ -329,7 +373,7 @@ html {
     }
 
     .header {
-        padding: 40px 20px 0 20px;
+        padding: 20px 20px 0 20px;
     }
 
     .body {
@@ -342,6 +386,10 @@ html {
 
     .info p {
         font-size: 18px;
+    }
+
+    .body-info {
+        padding-top: 20vh;
     }
 
     .button {
@@ -388,7 +436,7 @@ html {
     }
 
     .button-control {
-        margin-top: 60px;
+        margin-top: 40px;
     }
 
 }

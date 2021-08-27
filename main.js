@@ -37,6 +37,7 @@ const playlistOnSecond = $('.playlist .header-icon-menu')
 const volumeSlider = $('.volume-slider')
 const upVolume = $('.up-volume')
 const downVolume = $('.down-volume')
+const dashboard = $('.dashboard')
 
 const app = {
     currentIndex: 0,
@@ -165,6 +166,7 @@ const app = {
         audio.src = this.currentSong.path;
     },
     handleEvents: function() {
+        audio.volume = volumeSlider.value / 100
         const _this = this;
 
         // xử lý khi cd quay 
@@ -199,7 +201,6 @@ const app = {
             _this.isPlaying = true;
             player.classList.add('playing');
             cdThumbAnimate.play();
-            audio.volume = volumeSlider.value / 100
         }
 
         // khi audio dừng
@@ -293,11 +294,13 @@ const app = {
         // menu mở list nhạc
         menu.onclick = function() {
             playlist.classList.add('active')
+            dashboard.classList.add('active')
         }
 
         // trở về trnag chủ 
         backMainBtn.onclick = function() {
             playlist.classList.remove('active')
+            dashboard.classList.remove('active')
         }
 
         // back in main 

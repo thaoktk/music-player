@@ -8,6 +8,7 @@
     margin: 0;
     padding: 0;
     box-sizing: inherit;
+    -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -16,7 +17,6 @@ body {
     align-items: center;
     justify-content: center;
     width: 100%;
-    min-height: 100vh;
 }
 
 html {
@@ -25,17 +25,25 @@ html {
 }
 
 .player {
+    margin: auto;
     position: relative;
     width: 480px;
+    overflow-x: hidden;
+}
 
+.player::-webkit-scrollbar {
+    display: none;
 }
 
 .dashboard {
+    position: relative;
     max-width: 480px;
     width: 100%;
-    height: auto;
     background-color: #ffeff3;
-   
+}
+
+.dashboard.active {
+    overflow-y: hidden;
 }
 
 /* header */
@@ -269,22 +277,28 @@ html {
 
 .playlist {
     background: linear-gradient(to left top, #ffeff3, #fcdde4);
-    position: fixed;
-    z-index: 1;
+    position: absolute;
+    z-index: 5;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    opacity: 0;
+    max-width: 480px;
+    width: 100%;
     transform: translateX(100%);
-    transition: all 0.9s ease;
     overflow-y: auto;
     -webkit-tap-highlight-color: transparent;
+    opacity: 0;
+    transition: 0.9s;
+    display: none;
+}
+
+.playlist::-webkit-scrollbar {
+    display: none;
 }
 
 .playlist.active {
-    opacity: 1;
     transform: translateX(0);
+    opacity: 1;
+    display: block;
 }
 
 .list {
@@ -377,7 +391,7 @@ html {
         padding-bottom: 10px;
     }
 
-    .dashboard {
+    .dashboard, .playlist {
         height: 100vh;
     }
 }
@@ -386,7 +400,7 @@ html {
     .spacer {
         margin-bottom: -45px;
     }
-    .dashboard {
+    .dashboard, .playlist {
         height: 100vh;
     }
     .list {
@@ -428,12 +442,15 @@ html {
     
 }
 
-@media (max-width: 1024px) and (min-width: 768px) {
+@media (max-width: 1024px) and (min-width: 750px) {
     .player {
         width: 100%;
     }
-    .dashboard {
+    .dashboard, .playlist {
         max-width: 100%;
-        height: auto;
+    }
+
+    .playlist {
+        height: 100vh;
     }
 }

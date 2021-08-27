@@ -35,6 +35,8 @@ const backMainBtn = $('.header-icon-back-playlist')
 const backInMainBtn = $('.header-icon')
 const playlistOnSecond = $('.playlist .header-icon-menu')
 const volumeSlider = $('.volume-slider')
+const upVolume = $('.up-volume')
+const downVolume = $('.down-volume')
 
 const app = {
     currentIndex: 0,
@@ -197,6 +199,7 @@ const app = {
             _this.isPlaying = true;
             player.classList.add('playing');
             cdThumbAnimate.play();
+            audio.volume = volumeSlider.value / 100
         }
 
         // khi audio dừng
@@ -309,6 +312,15 @@ const app = {
         volumeSlider.oninput = function() {
             _this.setVolume();
         }
+
+        upVolume.onclick = function() {
+            _this.upVolume();
+        }
+        
+
+        downVolume.onclick = function() {
+            _this.downVolume();
+        }
     },
     playRandomSong: function() {
         let newIndex
@@ -336,7 +348,21 @@ const app = {
         this.loadCurrentSong();
     },
     setVolume: function() {
-        audio.volume = volumeSlider.value / 100;
+        audio.volume = volumeSlider.value / 100
+    },
+    upVolume: function() {
+        audio.volume = audio.volume + 0.01;
+        if (audio.volume > 1) {
+            audio.volume = 1;
+        }
+        volumeSlider.value = Math.floor((audio.volume) * 100)
+    },
+    downVolume: function() {
+        audio.volume = audio.volume - 0.01;
+        if (audio.volume < 0) {
+            audio.volume = 0;
+        }
+        volumeSlider.value = Math.floor((audio.volume) * 100)
     },
     scrollToActiveSong: function() {
         const songActive = $('.song.active')

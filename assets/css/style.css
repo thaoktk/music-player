@@ -12,6 +12,11 @@
 
 body {
     background-color: rgb(214, 213, 213);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 100vh;
 }
 
 html {
@@ -20,25 +25,23 @@ html {
 }
 
 .player {
-    margin: auto;
     position: relative;
+    width: 480px;
+
 }
 
 .dashboard {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    max-width: 480px;
+    width: 100%;
+    height: auto;
     background-color: #ffeff3;
-    overflow: hidden;
-    height: 100vh;
-    position: relative;
+   
 }
 
 /* header */
 .header {
-    padding: 30px 20px 0 20px;
+    padding: 0 20px;
+    height: 100px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -59,19 +62,22 @@ html {
     cursor: pointer;
 }
 
+.spacer {
+    margin-bottom: 100px;
+}
+
 /* body */
 
 .body {
+    width: 100%;
     padding: 0 30px 30px 30px;
     background-color: #fff;
     border-top-left-radius: 50px;
     border-top-right-radius: 50px;
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    height: auto;
-    min-height: 400px;
+    flex: 1;
+    min-height: 500px;
+    display: flex;
+    position: relative;
 }
 
 .cd {
@@ -85,8 +91,8 @@ html {
     top: -20%; 
     left: 50%;
     transform: translateX(-50%);
-    -moz-box-shadow:    0px 0px 20px 3px #f3bdc9;
-    -webkit-box-shadow: 0px 0px 20px 3px #f3bdc9;
+    -moz-box-shadow:    0px 0px 30px 3px #f7f7f7;
+    -webkit-box-shadow: 0px 0px 30px 3px #f3bdc9;
 }
 
 .cd-thumb {
@@ -98,9 +104,12 @@ html {
 }
 
 .body-info {
+    flex: 1;
     position: relative;
     padding-top: 23vh;
     padding-bottom: 30px;
+    display: flex;
+    flex-direction: column;
 }
 
 .info {
@@ -120,6 +129,8 @@ html {
 
 .control {
     margin-top: 4px;
+    flex: 1;
+    justify-self: flex-end;
 }
 
 /* like & repeat */
@@ -157,7 +168,7 @@ html {
 
 /* volume */
 .volume {
-    margin-top: 20px;
+    margin: 20px 0;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -197,6 +208,7 @@ html {
     background-color: #fdf5f7;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
+    position: relative;
 }
 
 .progress {
@@ -206,8 +218,8 @@ html {
     height: 100%;
     opacity: 0.7;
     border-radius: 5px;
-    -webkit-transition: width 0.1s lỉnear;
-    transition: width 0.1s lỉnear;
+    -webkit-transition: width 0.1s linear;
+    transition: width 0.1s linear;
 }
 
 .progress:hover {
@@ -217,7 +229,6 @@ html {
 
 /* control */
 .button-control {
-    margin-top: 30px;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -365,9 +376,19 @@ html {
     .body-info {
         padding-bottom: 10px;
     }
+
+    .dashboard {
+        height: 100vh;
+    }
 }
 
 @media (max-width: 739px) and (min-width: 350px) {
+    .spacer {
+        margin-bottom: -45px;
+    }
+    .dashboard {
+        height: 100vh;
+    }
     .list {
         padding: 0 30px;
     }
@@ -396,10 +417,6 @@ html {
         margin-top: 20px;
     }
 
-    .progress {
-        margin-top: 20px;
-    }
-
     .control {
         margin-top: 20px;
     }
@@ -410,33 +427,13 @@ html {
 
     
 }
-@media (max-width: 1024px) and (min-width: 740px) {
-    .info h3 {
-        font-size: 28px;
-    }
 
-    .info p {
-        font-size: 18px;
+@media (max-width: 1024px) and (min-width: 768px) {
+    .player {
+        width: 100%;
     }
-
-    .cd {
-        top: -20%;
+    .dashboard {
+        max-width: 100%;
+        height: auto;
     }
-
-    .header h4, .header-icon-menu, .header-icon, .header-icon-back-playlist {
-        font-size: 28px;
-    }
-
-    .body-info {
-        padding-top: 20vh;
-    }
-
-    .body {
-        top: 30%;
-    }
-
-    .button-control {
-        margin-top: 40px;
-    }
-
 }
